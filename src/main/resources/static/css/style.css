@@ -1,0 +1,10 @@
+@charset "UTF-8";
+.background {
+	background-color: #EEEEEE;
+}
+.jumbotron {
+	
+	background-image: url(/img/food.jpeg);
+	background-size: cover;
+	
+}

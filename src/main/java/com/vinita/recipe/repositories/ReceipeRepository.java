@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+
 import com.vinita.recipe.models.Recipe;
 
 
@@ -14,5 +15,7 @@ import com.vinita.recipe.models.Recipe;
 public interface ReceipeRepository extends CrudRepository<Recipe, Long>{
 	List<Recipe> findAll();
 	//List<Product> findByCategoriesNotContains(Category category);
-	
+	List<Recipe> findByTitleContaining(String title);
+	List<Recipe> findTop4ByOrderByUserLikedDesc();
+	List<Recipe> findTop4ByOrderByCreatedAtDesc();
 }

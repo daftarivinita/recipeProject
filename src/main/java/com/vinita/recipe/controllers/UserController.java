@@ -40,7 +40,7 @@ public class UserController {
 		} else {
 			User newUser = this.uService.registerUser(user);
 			session.setAttribute("user__id",newUser.getId());
-			return "redirect:/user/dashboard";
+			return "redirect:/";
 		}
 		
 	}
@@ -53,7 +53,7 @@ public class UserController {
 		}
 		User userToLog = this.uService.getUserByEmail(email);
 		session.setAttribute("user__id", userToLog.getId());
-		return "redirect:/user/dashboard";
+		return "redirect:/";
 	}
 //	@GetMapping("/landing")
 //	public String landing(HttpSession session ) {
@@ -65,11 +65,11 @@ public class UserController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	@GetMapping("/dashboard")
-	public String usertolog(Model mymodel, HttpSession session) {
-		mymodel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
-		return "dashboard.jsp";
-	}
+//	@GetMapping("/dashboard")
+//	public String usertolog(Model mymodel, HttpSession session) {
+//		mymodel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
+//		return "dashboard.jsp";
+//	}
 	
 	@GetMapping("/bookmark")
 		public String allFavorite(HttpSession session, Model myModel, RedirectAttributes redirectAttributes) {

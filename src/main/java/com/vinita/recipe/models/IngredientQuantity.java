@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+
 @Entity
 @Table(name="recipe_ingredient_quantity")
 public class IngredientQuantity {
@@ -28,7 +29,7 @@ public class IngredientQuantity {
     @JoinColumn(name = "ingredient_id")
 	private Ingredient ingredient;
 	
-	
+	@NotBlank
 	private String quantity;
 
 	public IngredientQuantity() {

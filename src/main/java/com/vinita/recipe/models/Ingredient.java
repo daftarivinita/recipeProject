@@ -10,7 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 @Entity
 @Table(name="ingredients")
@@ -21,11 +22,15 @@ public class Ingredient {
     private Long id;
 	
 	@Column(unique = true)
-	@NotBlank
+	@Size(min = 1, max = 200, message 
+    = "About Me must be between 1 and 200 characters")
 	private String name;
+	
 	
 	@OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)
 	private List<IngredientQuantity> ingrediants;
+	
+	
 	
 	public Ingredient() {
 	}

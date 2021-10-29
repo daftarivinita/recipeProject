@@ -38,7 +38,7 @@
         	
 
 <div class= "container bg-gradient-dark">
-
+<p>${searchError}</p>
 <h1 class = "text-center">Add A Recipe</h1>
 <form:form class= "border border-success pt-3 px-3 pr-5" method="POST" action="/recipe/new" modelAttribute="recipe">
 
@@ -101,9 +101,7 @@
 	<p><button class="btn btn-success ">Submit</button></p>
 </div>
 </form:form>
-<c:forEach items="${allRecipe}" var="r">
-    <a href="/user/recipe/<c:out value="${r.id}"/>"><c:out value="${r.title}"/></a>
-</c:forEach>
+
 
 
 </div>

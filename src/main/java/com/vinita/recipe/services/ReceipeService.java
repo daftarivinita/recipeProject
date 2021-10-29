@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.vinita.recipe.models.Ingredient;
 import com.vinita.recipe.models.IngredientQuantity;
 import com.vinita.recipe.models.Recipe;
@@ -130,5 +131,15 @@ public class ReceipeService {
 	public void userDisSaveRecipe(User user, Recipe recipe) {
 		recipe.getUserSaves().remove(user);
 		this.rRepo.save(recipe);
+	}
+	
+	public List<Recipe> findAllByTitle(String title){
+		return this.rRepo.findByTitleContaining(title);
+	}
+	public List<Recipe> topTwoLiked(){
+		return this.rRepo.findTop4ByOrderByUserLikedDesc();
+	}
+	public List<Recipe> topTwoNew(){
+		return this.rRepo.findTop4ByOrderByCreatedAtDesc();
 	}
 }

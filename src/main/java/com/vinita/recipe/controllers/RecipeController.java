@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -66,9 +67,19 @@ public class RecipeController {
 	//home page
 	@GetMapping("/")
 	public String welcomePage(Model myModel,HttpSession session) {
+		if (session.getAttribute("user__id") == null) {
+			myModel.addAttribute("allRecipe", this.rService.getAllReceipe());
+			//System.out.println(this.rService.topTwoNew());
+			myModel.addAttribute("newRecipes", this.rService.topTwoNew());
+			myModel.addAttribute("topLiked", this.rService.topTwoLiked());
+			return "dashboard.jsp";
+		} else {
 		myModel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
 		myModel.addAttribute("allRecipe", this.rService.getAllReceipe());
+		myModel.addAttribute("newRecipes", this.rService.topTwoNew());
+		myModel.addAttribute("topLiked", this.rService.topTwoLiked());
 		return "dashboard.jsp";
+	}
 	}
 
 	
@@ -106,6 +117,7 @@ public class RecipeController {
 				redirectAttributes.addFlashAttribute("errors", "PLEASE LOGIN TO EDIT OR UPDATE!");
 				return "redirect:/user";
 			}
+			myModel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
 			Recipe target = this.rService.getReceipe(id);
 			myModel.addAttribute("recipe", target);
 			return "addPicture.jsp";
@@ -123,11 +135,12 @@ public class RecipeController {
 				return "addPicture.jsp";
 			}
 			else {
+				myModel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
 				recipe.setUser(this.uService.findUserById((Long)session.getAttribute("user__id")));
 				//recipe.setUser(this.uService.);
 				this.qService.deleteIngedientQuantitiesByRecipe(recipe.getId());
 				this.rService.updateReceipe(recipe);
-	            return "redirect:/recipe/{id}";
+	            return "redirect:/";
 			}
 		
 		}
@@ -159,24 +172,20 @@ public class RecipeController {
 		}
 		
 		@GetMapping("recipe/{id}")
-		public String showRecipe(@PathVariable("id") Long id, Model myModel) {
+		public String showRecipe(@PathVariable("id") Long id, Model myModel, HttpSession session) {
 			Recipe target = this.rService.getReceipe(id);
-			myModel.addAttribute("recipe", target);
-			return "detail.jsp";
-			
-		}
-//			
-			
-		@GetMapping("/user/recipe/{id}")
-		public String showUserRecipe(@PathVariable("id") Long id, Model myModel, HttpSession session) {
-			Recipe target = this.rService.getReceipe(id);
-			myModel.addAttribute("recipe", target);
+			if (session.getAttribute("user__id") == null) {
+				myModel.addAttribute("recipe", target);
+				return "detail.jsp";
+			}else {
+				myModel.addAttribute("recipe", target);
 
-			myModel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
-			
-			return "detail.jsp";
+				myModel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
+				return "detail.jsp";
+			}
 			
 		}
+
 		
 		//for likes
 		@GetMapping("/recipe/{id}/like")
@@ -184,7 +193,7 @@ public class RecipeController {
 			User targetUser= this.uService.findUserById((Long)session.getAttribute("user__id"));
 			Recipe targetRecipe = this.rService.getReceipe(id);
 			this.rService.userLikesRecipe(targetUser, targetRecipe);
-			return "redirect:/user/recipe/" + id;
+			return "redirect:/recipe/" + id;
 		}
 		
 		//for dislikes
@@ -193,7 +202,7 @@ public class RecipeController {
 			User targetUser= this.uService.findUserById((Long)session.getAttribute("user__id"));
 			Recipe targetRecipe = this.rService.getReceipe(id);
 			this.rService.userDisLikesRecipe(targetUser, targetRecipe);
-			return "redirect:/user/recipe/" + id;
+			return "redirect:/recipe/" + id;
 		}
 		//for bookmarks
 		@GetMapping("/recipe/{id}/bookmark")
@@ -201,7 +210,7 @@ public class RecipeController {
 			User targetUser= this.uService.findUserById((Long)session.getAttribute("user__id"));
 			Recipe targetRecipe = this.rService.getReceipe(id);
 			this.rService.userSaveRecipe(targetUser, targetRecipe);
-			return "redirect:/user/recipe/" + id;
+			return "redirect:/recipe/" + id;
 		}
 		
 		//for removing bookmarks
@@ -210,7 +219,7 @@ public class RecipeController {
 			User targetUser= this.uService.findUserById((Long)session.getAttribute("user__id"));
 			Recipe targetRecipe = this.rService.getReceipe(id);
 			this.rService.userDisSaveRecipe(targetUser, targetRecipe);
-			return "redirect:/user/recipe/" + id;
+			return "redirect:/recipe/" + id;
 		}
 		
 		//delete a recipe
@@ -222,4 +231,24 @@ public class RecipeController {
 			return "redirect:/";
 			
 		}
+		@PostMapping("/recipe/search")
+		public String recipeSearch(@RequestParam("recipe") String recipe, Model myModel, RedirectAttributes redirectAttributes, HttpSession session) {
+			String targetRecipe= (String) recipe;
+			List<Recipe> recipesearch = this.rService.findAllByTitle(targetRecipe);
+			if(recipesearch.size() == 0) {
+				redirectAttributes.addFlashAttribute("searchError", "This Recipe not found!");
+				return "redirect:/";
+			}
+			if (session.getAttribute("user__id") == null) {
+			
+			myModel.addAttribute("allRecipe", recipesearch);
+			return "search.jsp";
+			} else {
+				myModel.addAttribute("allRecipe", recipesearch);
+				myModel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
+				return "search.jsp";
+			}
+			
+		}
+
 }

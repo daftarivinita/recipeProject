@@ -21,7 +21,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
     	<ul class="nav navbar-nav mr-auto">
        		<li class="nav-item active px-3">
-        		<a class="nav-link " aria-current="page" href="/user/dashboard">Home</a>
+        		<a class="nav-link " aria-current="page" href="/">Home</a>
         	</li>
         	<li class="nav-item px-3">
           		<a class="nav-link" href="/user/bookmark">Favorite</a>

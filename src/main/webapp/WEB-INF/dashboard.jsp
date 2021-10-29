@@ -16,21 +16,53 @@
 <div>
 <c:choose>  
     <c:when test="${user != null}">  
-       <t:nav>
-		</t:nav> 
+       <t:nav></t:nav> 
+		<t:search></t:search>
     </c:when>  
-    
     <c:otherwise>  
-        <t:nav2>
-		</t:nav2>  
+        <t:nav2></t:nav2>
+		<t:search></t:search>
+		<t:header></t:header>
     </c:otherwise>  
 </c:choose>  
-<t:search>
-</t:search>
-
-<h1>Welcome ${user.firstName} ${user.lastName}</h1>
-<h4>Recent Recipe</h4>
+    
+		
+<div class = "container">
+<p class = "text-center display-4"><strong>${searchError}</strong></p>
+<h1 class= "my-4">Welcome ${user.firstName} ${user.lastName}</h1>
 <hr>
+<h4 class= "my-4">Recent Recipe</h4>
+<div class = "row">
+<c:forEach items="${newRecipes}" var="r">
+	<div class = "col">
+  
+     <img src = "${r.pictures[0].image_url}" height = "300" width = "250"/>
+     <p> <a href= "/recipe/${r.id}"><c:out value="${r.title}"/></a></p> 
+     </div>   
+</c:forEach>
+</div>
+
+<hr>
+<h4 class= "my-4">All Time Favorite</h4>
+<div class = "row">
+<c:forEach items="${topLiked}" var="r">
+ <div class = "col">
+   <img src = "${r.pictures[0].image_url}" height = "300" width = "250"/>  
+   <p> <a href= "/recipe/${r.id}"><c:out value="${r.title}"/></a></p> 
+   </div>    
+</c:forEach>
+</div>
+<hr>
+
+<h4 class= "my-3">All Recipe</h4>
+<ul>
+<c:forEach items="${allRecipe}" var="r">
+        <li><a href= "/recipe/${r.id}"><c:out value="${r.title}"/></a></li> 
+       
+</c:forEach>
+</ul>
+</div>
+
 </div>
 </body>
 </html>

@@ -41,6 +41,7 @@ public class Recipe {
 	private String prepTime;
 	
 	@NotBlank
+	@Column(columnDefinition = "TEXT")
 	private String steps;
     
 	//one user create a receipe

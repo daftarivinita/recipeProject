@@ -31,19 +31,22 @@
 </t:search>
 
 <div class = "container">
-<h1>Than you For submitting a WonderFul Recipe.</h1>
+<h1>Thank you For submitting a WonderFul Recipe.</h1>
 
 
-<form action="/recipe/${recipe.id}/picture" method="POST" enctype="multipart/form-data">
-	<div class = "form-group m-3">
-	<p>Please Upload A Picture of your Recipe</p>
+<form  class= "border border-success pt-3 px-3 pr-5"  action="/recipe/${recipe.id}/picture" method="POST" enctype="multipart/form-data">
+	<h4>Please Upload A Picture</h4>
+	<hr>
+	<div class = "form-group">
+	
 		<input type = "file" name = "pic" class ="formFileLg"  id = "inlineFormInput">
+	
+	<input type="submit" class="btn btn-success  m-1"  value="Upload Pic"/>
 	</div>
-	<input type="submit" class="btn btn-success  m-3"  value="Upload Pic"/>
 </form> 
 	
 	
-		
+<div class= "border border-success pt-3 px-3 pr-5">		
 <form:form method="POST" action="/recipe/${recipe.id}/edit" modelAttribute="recipe">
 <div class="form-group row">
 	<form:label class="col-sm-12 col-lg-2 col-form-label" path="title">Title</form:label>
@@ -57,9 +60,10 @@
 </div>
 
 
-
+<div class= "table-responsive m-3">	
+<table id="ingredientTable" class = "table table-bordered">
 	
-<table id="ingredientTable">
+
 	<tbody>
 	<c:forEach items="${recipe.ingrediants}" var="ingredientQuantity" varStatus="loop">
 		<tr>
@@ -78,8 +82,10 @@
 	</tbody>
 	
 </table>
-
-<input type="button" id="addIngredientRowBtn" name="addIngredientRowBtn" value="Add Ingredient" onclick="myFunction()"/>
+</div>
+<div class= "d-flex flex-row-reverse">
+<input type="button" class="mb-3 py-1 px-2 btn btn-success" id="addIngredientRowBtn" name="addIngredientRowBtn" value="Add Ingredient" onclick="myFunction()"/>
+</div>
 <div class="form-group row">
 	<form:label class="col-sm-12 col-lg-2 col-form-label"  path="steps">Steps:</form:label>
 	<form:errors path="steps"/>
@@ -92,7 +98,9 @@
 <c:choose>  
     <c:when test="${recipe.user.id == user.id}">  
     <form action = "/recipe/${recipe.id}/delete" method = "POST">
-       <button class="btn btn-danger">Delete</button>
+    
+       <button class="btn btn-danger mb-3">Delete</button>
+       
 </form>
        
 
@@ -104,7 +112,7 @@
 
 
 
-
+</div>
 </div>
 
 

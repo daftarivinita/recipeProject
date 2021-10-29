@@ -21,12 +21,12 @@
     
     <div class="collapse navbar-collapse ml-auto d-flex flex-row-reverse " id="navbarCollapse">
     	
-      	<form action= "/logout" method="POST" class="lead form-inline px-2 pt-2 pb-1">
-	        <input class="form-control mr-sm-2" type="search" placeholder="Search By Ingredient" aria-label="Search">
+      	<form action= "/recipe/search/ingredient" method="POST" class="lead form-inline px-2 pt-2 pb-1">
+	        <input class="form-control mr-sm-2" type="search" placeholder="Search By Ingredient" name="name" aria-label="Search">
 	        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
        </form>
-       <form action= "/logout" method="POST" class="lead form-inline pt-2 pb-1">
-	        <input class="form-control mr-sm-2" type="search" placeholder="Search By Recipe" aria-label="Search">
+       <form action= "/recipe/search" method="POST" class="lead form-inline pt-2 pb-1">
+	        <input class="form-control mr-sm-2" type="search" placeholder="Search By Recipe" name="recipe" aria-label="Search">
 	        <button class="btn btn-outline-success my-2 my-sm-0 " type="submit">Go</button>
        </form>
       	</div>

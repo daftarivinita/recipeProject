@@ -42,6 +42,9 @@ public class PictureService {
     	
     }
     
+    public void deletePicture(Long id) {
+		this.pRepo.deleteById(id);
+	}
    
     
     

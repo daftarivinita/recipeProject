@@ -11,21 +11,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 <body>
 <c:choose>  
     <c:when test="${user != null}">  
-       <t:nav>
-		</t:nav> 
+       <t:nav></t:nav> 
+		<t:search></t:search>
     </c:when>  
-    
     <c:otherwise>  
-        <t:nav2>
-		</t:nav2>  
+        <t:nav2></t:nav2>
+		<t:search></t:search>
+		<t:header></t:header>
     </c:otherwise>  
 </c:choose>
-<t:search>
-</t:search>
 <div class="container">
 <c:choose>
 	<c:when test="${user != null}">

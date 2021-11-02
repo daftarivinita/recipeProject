@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+
 
 
 @Entity
@@ -21,10 +21,11 @@ public class Ingredient {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 	
-	@Column(unique = true)
-	@Size(min = 1, max = 200, message 
-    = "About Me must be between 1 and 200 characters")
+	@Column(unique = true)         //nullable=false
 	private String name;
+	
+	
+   
 	
 	
 	@OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL)

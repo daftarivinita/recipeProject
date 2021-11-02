@@ -40,7 +40,7 @@
 <div class= "container bg-gradient-dark">
 <p>${searchError}</p>
 <h1 class = "text-center">Add A Recipe</h1>
-<form:form class= "border border-success pt-3 px-3 pr-5" method="POST" action="/recipe/new" modelAttribute="recipe">
+<form:form class= "border border-success pt-3 px-3 pr-5" method="POST" action="/recipe" modelAttribute="recipe">
 
 
 <div class="form-group row">
@@ -72,7 +72,7 @@
 			<form:input class="form-control"  rows = "10" cols = "30" path="ingrediants[0].quantity"/>
 		</td>
 	</tr>
-	<tr>
+	 <tr>
 		<td>
 			<form:label path="ingrediants[1].ingredient.name">Ingredient</form:label>
 			<form:errors path="ingrediants[1].ingredient.name"/>
@@ -83,7 +83,7 @@
 			<form:errors path="ingrediants[1].quantity"/>
 			<form:input class="form-control"  rows = "10" cols = "30" path="ingrediants[1].quantity"/>
 		</td>
-	</tr>
+	</tr> 
 	
 	
 </table>

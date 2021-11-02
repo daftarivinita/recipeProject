@@ -11,8 +11,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 <body>
 <c:choose>  
@@ -29,7 +29,7 @@
 <div class = "container">
 <c:choose>
 	<c:when test="${user != null}">
-	    <h1 class="mt-5 mb-2 ">Welcome ${user.firstName} ${user.lastName}</h1>
+	    <h1 class="mt-5 mb-2 ">Welcome to <strong> MyRecipe</strong></h1>
 	    <hr>
 	</c:when>
 	<c:otherwise>
@@ -41,12 +41,12 @@
 </c:choose>
 
 <c:if test="${user != null}">
-<div class="row">
+<div class="d-flex justify-content-between">
 	<h2>${recipe.title}</h2>
 	
 	<c:choose>
 		 <c:when test="${recipe.userSaves.contains(user)}">
-		 	<a href="/recipe/${recipe.id}/unbookmark" class="btn btn-danger text-right">Unsave</a>
+		 	<a href="/recipe/${recipe.id}/unbookmark" class="btn btn-danger">Unsave</a>
 		 </c:when>
 		 <c:otherwise>
 		 	<a href="/recipe/${recipe.id}/bookmark" class="btn btn-success">Save</a>
@@ -55,7 +55,7 @@
 	</div>
  </c:if>
 
-<p>Prep Time: <span>${recipe.prepTime}</span></p>
+<p>Total Time: <span>${recipe.prepTime}</span></p>
 	  
 	
 	 
@@ -63,21 +63,24 @@
 
 <img class="img-fluid rounded mx-auto d-block" src= "${recipe.pictures[0].image_url}" height = "400" width = "500"/>
 </c:if>
+
+<h4>Ingredients:</h4>
 <ul>
 <c:forEach items="${recipe.ingrediants}" var="i">
   <li><c:out value="${i.ingredient.name}"/>, <c:out value="${i.quantity}"/></li>
 </c:forEach>
 </ul>
+<h4>Steps:</h4>
 <p>${recipe.steps}</p>
     
-    
+ <div class ="row">
 <c:if test="${user != null}">
 	<c:choose>
 		 <c:when test="${recipe.userLiked.contains(user)}">
-		 	<a href="/recipe/${recipe.id}/dislike">DisLike</a>
+		 	<a class="btn btn-danger mr-2" href="/recipe/${recipe.id}/dislike">DisLike</a>
 		 </c:when>
 		 <c:otherwise>
-		 	<a href="/recipe/${recipe.id}/like">Like</a>
+		 	<a class="btn btn-success mr-2" href="/recipe/${recipe.id}/like">Like</a>
 		 </c:otherwise>
 	</c:choose> 
  </c:if>
@@ -88,14 +91,15 @@
  <c:choose>  
     <c:when test="${recipe.user.id == user.id}">  
     <form action = "/recipe/${recipe.id}/delete" method = "POST">
-       <button class="btn btn-danger">Delete</button>
+       <button class="btn btn-danger mr-2">Delete</button>
 	</form>
-     <a href="/recipe/${recipe.id}/edit">Edit</a>  
+     <a class="btn btn-success" href="/recipe/${recipe.id}/edit">Edit</a>  
     </c:when>  
     <c:otherwise>  
       
     </c:otherwise>  
 </c:choose> 
+</div>  
 <hr>
 <c:if test="${user != null}">
 	<h3>All Recipe Submitted By You</h3>

@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.vinita.recipe.models.IngredientQuantity;
+import com.vinita.recipe.models.Picture;
 import com.vinita.recipe.models.Recipe;
 import com.vinita.recipe.models.User;
 import com.vinita.recipe.services.IngredientQuantityService;
@@ -95,7 +95,7 @@ public class RecipeController {
 //     
 //    }
 	//to create ingrediant
-		@PostMapping("/recipe/new")
+		@PostMapping("/recipe")
 	    public String createReciepe(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult result, HttpSession session) {
 			
 	        if (result.hasErrors()) {
@@ -222,15 +222,33 @@ public class RecipeController {
 			return "redirect:/recipe/" + id;
 		}
 		
+		
+		//something wrong with delete method
 		//delete a recipe
 		@PostMapping("/recipe/{id}/delete")
 		public String deleteRecipe(@PathVariable("id") Long id, HttpSession session) {
-			//Recipe target = this.rService.getReceipe(id);
-			this.qService.deleteIngedientQuantitiesByRecipe(id);
+			Recipe target = this.rService.getReceipe(id);
+			List<Picture> allPicture= target.getPictures();
+			if(allPicture.size() > 0) {
+			for (Picture pic : allPicture) {
+				this.pService.deletePicture(pic.getId());
+				}
+			}
+			
+			List<IngredientQuantity> allIngredient = target.getIngrediants();
+			if(allIngredient.size() >0) {
+				for(IngredientQuantity ing: allIngredient) {
+				this.qService.deleteIngredientQuantity(ing.getId());
+				}
+			}
 			this.rService.deleteReceipe(id);
 			return "redirect:/";
 			
 		}
+			
+			
+			
+			
 		@PostMapping("/recipe/search")
 		public String recipeSearch(@RequestParam("recipe") String recipe, Model myModel, RedirectAttributes redirectAttributes, HttpSession session) {
 			String targetRecipe= (String) recipe;

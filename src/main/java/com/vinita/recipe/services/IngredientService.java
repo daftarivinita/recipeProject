@@ -37,6 +37,12 @@ public class IngredientService {
 		return this.iRepo.save(ingredient);
 	}
 	
+	//to get one ingredient if it exits in 
+	public Ingredient getIngredientBYName(String name) {
+		Ingredient target = this.iRepo.findByName(name);
+		return target;
+	}
+	
 //	//get all product
 //	public List<Ingredient> getAllIngredient(){
 //		return this.iRepo.findAll();

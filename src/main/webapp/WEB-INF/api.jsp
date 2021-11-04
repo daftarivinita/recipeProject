@@ -14,7 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <c:choose>  
@@ -28,7 +28,12 @@
 		<t:header></t:header>
     </c:otherwise>  
 </c:choose>
+
 <div class = "container">
+<form action= "/recipe/search/ingredient/api" method="POST" class="lead form-inline px-2 pt-2 pb-1">
+	        <input class="form-control mr-sm-2" type="search" placeholder="Search By Ingredient" name="name" aria-label="Search">
+	        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+</form>
 <div class="row">
 <c:forEach items="${meals}" var="meal">
 <div class="col p-2">

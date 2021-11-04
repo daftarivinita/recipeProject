@@ -99,11 +99,7 @@ public class ReceipeService {
 		return this.rRepo.findAll();
 	}
 	
-	//to get one ingredient if it exits in 
-	public Ingredient getIngredientBYName(String name) {
-		Ingredient target = this.iRepo.findByName(name);
-		return target;
-	}
+	
 
 
 	// adding likes to recipe from user
@@ -141,5 +137,9 @@ public class ReceipeService {
 	}
 	public List<Recipe> topTwoNew(){
 		return this.rRepo.findTop4ByOrderByCreatedAtDesc();
+	}
+	
+	public List<Recipe> findRecipeWithIngrediant(IngredientQuantity ing){
+		return this.findRecipeWithIngrediant(ing);
 	}
 }

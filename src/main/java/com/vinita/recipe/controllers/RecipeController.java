@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.vinita.recipe.models.Ingredient;
 import com.vinita.recipe.models.IngredientQuantity;
 import com.vinita.recipe.models.Picture;
 import com.vinita.recipe.models.Recipe;
@@ -257,6 +258,34 @@ public class RecipeController {
 				redirectAttributes.addFlashAttribute("searchError", "This Recipe not found!");
 				return "redirect:/";
 			}
+			if (session.getAttribute("user__id") == null) {
+			
+			myModel.addAttribute("allRecipe", recipesearch);
+			return "search.jsp";
+			} else {
+				myModel.addAttribute("allRecipe", recipesearch);
+				myModel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
+				return "search.jsp";
+			}
+			
+		}
+		
+		@PostMapping("/recipe/search/ingredient/api")
+		public String recipeSearchFromingredient(@RequestParam("name") String name, Model myModel, RedirectAttributes redirectAttributes, HttpSession session) {
+			System.out.println(name);
+			String nameToFind = name.toLowerCase();
+
+			Ingredient targetIng = this.iService.getIngredientBYName(nameToFind);
+			System.out.println(targetIng);
+
+			if(targetIng == null) {
+				redirectAttributes.addFlashAttribute("searchError", "This Recipe not found with this Ingredient!");
+			}
+			
+			IngredientQuantity ing = this.qService.getIngredientQuantity(targetIng);
+			List<Recipe> recipesearch = this.rService.findRecipeWithIngrediant(ing);
+			System.out.println(recipesearch);
+
 			if (session.getAttribute("user__id") == null) {
 			
 			myModel.addAttribute("allRecipe", recipesearch);

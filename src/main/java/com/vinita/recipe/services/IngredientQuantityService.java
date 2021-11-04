@@ -5,6 +5,7 @@ package com.vinita.recipe.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vinita.recipe.models.Ingredient;
 import com.vinita.recipe.models.IngredientQuantity;
 import com.vinita.recipe.repositories.IngredientQuantityRepository;
 
@@ -37,6 +38,11 @@ public class IngredientQuantityService {
 	//update a ingredientQuantity 
 	public IngredientQuantity updateReceipe(IngredientQuantity ingredientQuantity) {
 		return this.qRepo.save(ingredientQuantity);
+	}
+	
+	//get ingredient quantity from ingredient
+	public IngredientQuantity getIngredientQuantity(Ingredient ing) {
+		return this.qRepo.findByIngredient(ing);
 	}
 	
 

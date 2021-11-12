@@ -31,7 +31,7 @@
 </t:search>
 
 <div class = "container">
-<h4>Thank you for submitting a Recipe.</h4>
+<h4 class = "my-4">Thank you for submitting a Recipe.</h4>
 
 
 <form  class= "border border-success pt-3 px-3 pr-5"  action="/recipe/${recipe.id}/picture" method="POST" enctype="multipart/form-data">

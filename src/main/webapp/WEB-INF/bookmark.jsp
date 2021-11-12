@@ -51,7 +51,11 @@
 </div>
     </c:otherwise>  
 </c:choose>
-
+<!-- <ul>
+  <li><a href="https://www.facebook.com/sharer.php?..." target="blank" rel="noopener noreferrer"><img src="facebook-icon.png" alt="Share Page on Facebook" /></a></li>
+  <li><a href="https://twitter.com/intent/tweet?..." target="blank" rel="noopener noreferrer"><img src="twitter-icon.png" alt="Share Page on Twitter" /></a></li>
+  <li><a href="https://www.linkedin.com/shareArticle?..." target="blank" rel="noopener noreferrer"><img src="linkedin-icon.png" alt="Share Page on LinkedIn" /></a></li>
+</ul> -->
 
 
 </div>

@@ -12,7 +12,7 @@ import com.vinita.recipe.models.IngredientQuantity;
 
 public interface IngredientQuantityRepository extends CrudRepository<IngredientQuantity, Long>{
 	
-	IngredientQuantity findByIngredient(Ingredient ing); 
+	
 
 	@Transactional
 	List<IngredientQuantity> deleteByRecipeId(Long recipeId);

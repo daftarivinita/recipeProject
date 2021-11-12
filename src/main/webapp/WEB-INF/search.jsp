@@ -33,7 +33,7 @@
 	</c:when>
 	<c:otherwise>
 	    <h1 class= "my-3">Welcome to <strong> MyRecipe</strong></h1>
-	    <h4>To like, save and add your favorite recipe please logIn</h4>
+	    <h4>To like, save and add your favorite recipe please <a href="/user">login</a></h4>
 	</c:otherwise>
 </c:choose>
 <hr>

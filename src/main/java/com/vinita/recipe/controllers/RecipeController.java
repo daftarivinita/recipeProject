@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.vinita.recipe.models.Ingredient;
+
 import com.vinita.recipe.models.IngredientQuantity;
 import com.vinita.recipe.models.Picture;
 import com.vinita.recipe.models.Recipe;
@@ -80,21 +80,10 @@ public class RecipeController {
 		myModel.addAttribute("newRecipes", this.rService.topTwoNew());
 		myModel.addAttribute("topLiked", this.rService.topTwoLiked());
 		return "dashboard.jsp";
-	}
+		}
 	}
 
 	
-//	//to create ingrediant
-//	@PostMapping("/new/ingredient")
-//    public String createIngrediant(@Valid @ModelAttribute("ingredient") Ingredient ingredient, BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "/food/new.jsp";
-//        } else {
-//            this.iService.createIngrediant(ingredient);
-//            return "redirect:/";
-//        }
-//     
-//    }
 	//to create ingrediant
 		@PostMapping("/recipe")
 	    public String createReciepe(@Valid @ModelAttribute("recipe") Recipe recipe, BindingResult result, HttpSession session) {
@@ -224,7 +213,7 @@ public class RecipeController {
 		}
 		
 		
-		//something wrong with delete method
+		
 		//delete a recipe
 		@PostMapping("/recipe/{id}/delete")
 		public String deleteRecipe(@PathVariable("id") Long id, HttpSession session) {
@@ -270,32 +259,6 @@ public class RecipeController {
 			
 		}
 		
-		@PostMapping("/recipe/search/ingredient/api")
-		public String recipeSearchFromingredient(@RequestParam("name") String name, Model myModel, RedirectAttributes redirectAttributes, HttpSession session) {
-			System.out.println(name);
-			String nameToFind = name.toLowerCase();
-
-			Ingredient targetIng = this.iService.getIngredientBYName(nameToFind);
-			System.out.println(targetIng);
-
-			if(targetIng == null) {
-				redirectAttributes.addFlashAttribute("searchError", "This Recipe not found with this Ingredient!");
-			}
-			
-			IngredientQuantity ing = this.qService.getIngredientQuantity(targetIng);
-			List<Recipe> recipesearch = this.rService.findRecipeWithIngrediant(ing);
-			System.out.println(recipesearch);
-
-			if (session.getAttribute("user__id") == null) {
-			
-			myModel.addAttribute("allRecipe", recipesearch);
-			return "search.jsp";
-			} else {
-				myModel.addAttribute("allRecipe", recipesearch);
-				myModel.addAttribute("user", this.uService.findUserById((Long)session.getAttribute("user__id")));
-				return "search.jsp";
-			}
-			
-		}
+		
 
 }

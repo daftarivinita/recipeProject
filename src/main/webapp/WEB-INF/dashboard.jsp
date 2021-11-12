@@ -28,10 +28,11 @@
     
 		
 <div class = "container">
+<p class = "text-center display-4"><strong>${errorFromApi}</strong></p>
 <p class = "text-center display-4"><strong>${searchError}</strong></p>
 <h1 class= "my-4">Welcome ${user.firstName} ${user.lastName}</h1>
 <hr>
-<h4 class= "my-4">Recent Recipe</h4>
+<h4 class= "my-4">Recent Recipes</h4>
 <div class = "row">
 <c:forEach items="${newRecipes}" var="r">
 	<div class = "col">
@@ -43,7 +44,7 @@
 </div>
 
 <hr>
-<h4 class= "my-4">All Time Favorite</h4>
+<h4 class= "my-4">All Time Favorites</h4>
 <div class = "row">
 <c:forEach items="${topLiked}" var="r">
  <div class = "col">

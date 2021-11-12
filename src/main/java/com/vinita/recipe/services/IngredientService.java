@@ -43,29 +43,5 @@ public class IngredientService {
 		return target;
 	}
 	
-//	//get all product
-//	public List<Ingredient> getAllIngredient(){
-//		return this.iRepo.findAll();
-//	}
-//	
-//	//find product that are not in specific category
-//		public List<Product> getProductNotInCategory(Category category){
-//			return this.Repo.findByCategoriesNotContains(category);
-//		}
-		
-//	//setting many to many
-//	public void addCategoryToProduct(Category category, Product product) {
-//		product.getCategories().add(category);
-//		this.pRepo.save(product);
-//	}
-//		// adding likes to product from user
-//	public void userLikesProduct(User user, Product product) {
-//		product.getUserLiked().add(user);
-//		this.pRepo.save(product);
-//	}
-//	//removing likes from product
-//	public void userDisLikesProduct(User user, Product product) {
-//		product.getUserLiked().remove(user);
-//		this.pRepo.save(product);
-//	}
+
 }

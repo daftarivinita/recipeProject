@@ -30,15 +30,12 @@
 </c:choose>
 
 <div class = "container">
-<form action= "/recipe/search/ingredient/api" method="POST" class="lead form-inline px-2 pt-2 pb-1">
-	        <input class="form-control mr-sm-2" type="search" placeholder="Search By Ingredient" name="name" aria-label="Search">
-	        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
-</form>
+<h1>Results from Youtube</h1>
 <div class="row">
 <c:forEach items="${meals}" var="meal">
 <div class="col p-2">
 <img src='${meal.getString("strMealThumb")}' height = "300" width = "250"/>
-
+<p class="text-center"><a href='/recipe/${meal.getString("idMeal")}/api' target="blank">Click Here</a></p>
 <p class="text-center"> ${meal.getString("strMeal")}</p>
 </div>
  </c:forEach>

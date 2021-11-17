@@ -14,6 +14,7 @@
 </head>
 <body class="background">
 <div>
+<h1></h1>
 <c:choose>  
     <c:when test="${user != null}">  
        <t:nav></t:nav> 
